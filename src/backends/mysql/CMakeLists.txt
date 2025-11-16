@@ -30,7 +30,7 @@ soci_define_backend_target(
   MISSING_DEPENDENCY_BEHAVIOR "${DEPENDENCY_MODE}"
 )
 
-target_include_directories(soci_mysql PUBLIC "/opt/homebrew/opt/mysql-client/include")
+target_include_directories(soci_mysql PUBLIC "/opt/homebrew/opt/mysql-client/include/mysql")
 
 target_include_directories(soci_mysql PUBLIC "/opt/homebrew/opt/mysql-client/include")
 
