@@ -134,6 +134,11 @@ function(soci_public_dependency)
     set(FOUND_ONE ON)
 
     target_link_libraries("${UNDERLYING_TARGET}" PUBLIC "$<BUILD_INTERFACE:${TGT}>")
+
+    get_target_property(DEP_INCLUDE_DIRS "${TGT}" INTERFACE_INCLUDE_DIRECTORIES)
+    if (DEP_INCLUDE_DIRS)
+      target_include_directories("${UNDERLYING_TARGET}" PUBLIC "$<BUILD_INTERFACE:${DEP_INCLUDE_DIRS}>")
+    endif()
   endforeach()
 endfunction()
 

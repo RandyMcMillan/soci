@@ -81,7 +81,17 @@ function(soci_define_backend_target)
 
     list(GET CURRENT_DEP_SEARCH 0 CURRENT_DEP)
 
-    find_package(${CURRENT_DEP_SEARCH} ${REQUIRE_FLAG})
+    set(${CURRENT_DEP}_FOUND FALSE)
+    foreach (CURRENT_TARGET IN LISTS CURRENT_DEP_TARGETS)
+      if (TARGET "${CURRENT_TARGET}")
+        set(${CURRENT_DEP}_FOUND TRUE)
+        break()
+      endif()
+    endforeach()
+
+    if (NOT ${CURRENT_DEP}_FOUND)
+      find_package(${CURRENT_DEP_SEARCH} ${REQUIRE_FLAG})
+    endif()
 
     if (NOT ${CURRENT_DEP}_FOUND)
       if (ERROR_ON_MISSING_DEPENDENCY)
